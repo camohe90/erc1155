@@ -1,33 +1,22 @@
-# nft-mix Basado en el repo de Patrick Collines
+# nft-mix Basado en el repo de Patrick Collins
 
-<br/>
-<p align="center">
-<a href="https://chain.link" target="_blank">
-<img src="https://raw.githubusercontent.com/PatrickAlphaC/nft-mix/main/img/shiba-inu.png" width="225" alt="NFT Shiba Inu">
-<img src="https://raw.githubusercontent.com/PatrickAlphaC/nft-mix/main/img/pug.png" width="225" alt="NFT Pug">
-<img src="https://raw.githubusercontent.com/PatrickAlphaC/nft-mix/main/img/st-bernard.png" width="225" alt="NFT St.Bernard">
-</a>
-</p>
-<br/>
+En este repositorio vamos a desplegar un contrato inteligente de NFT para crear una colección de mascotas
 
-This is a repo to work with and use NFTs smart contracts in a python environment, using the Chainlink-mix as a starting point. 
+## Prerequisitos
 
-If you'd like to see another repo using random NFTs that are deployed to mainnet, check out the [D&D package](https://github.com/PatrickAlphaC/dungeons-and-dragons-nft).
+Por favor instale o tenga instalado lo siguiente:
 
-## Prerequisites
-
-Please install or have installed the following:
-
-- [nodejs and npm](https://nodejs.org/en/download/)
+- [nodejs y npm](https://nodejs.org/en/download/)
 - [python](https://www.python.org/downloads/)
-## Installation
+## Instalación
 
-1. [Install Brownie](https://eth-brownie.readthedocs.io/en/stable/install.html), if you haven't already. Here is a simple way to install brownie.
+1. [Instalar brownie](https://eth-brownie.readthedocs.io/en/stable/install.html), sino lo haz hecho, esta es una forma sencilla de hacerlo.
+
 
 ```bash
 pip install eth-brownie
 ```
-Or, if that doesn't work, via pipx
+Sino funciona podrias hacerlo via pipx
 ```bash
 pip install --user pipx
 pipx ensurepath
@@ -35,168 +24,78 @@ pipx ensurepath
 pipx install eth-brownie
 ```
 
-2. Clone this repo
+2. Clone este repo 
 ```
-brownie bake nft-mix
-cd nft
+https://github.com/camohe90/nft-mix
+cd nft-mix
 ```
 
-1. [Install ganache-cli](https://www.npmjs.com/package/ganache-cli)
+3. [Instala ganache ganache-cli](https://www.npmjs.com/package/ganache-cli)
 
 ```bash
 npm install -g ganache-cli
 ```
+4. Instala los contratos de openzeppelin
 
-If you want to be able to deploy to testnets, do the following. 
+```bash
+npm install @openzeppelin/contracts
+```
+Si quieres desplagar el NFT en una red de pruebas debes hacer lo siguiente
 
-4. Set your environment variables
+5. Configura las variables de entorno
 
-Set your `WEB3_INFURA_PROJECT_ID`, and `PRIVATE_KEY` [environment variables](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). 
+Configura tus [variables de entorno](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html) `WEB3_INFURA_PROJECT_ID`, y `PRIVATE_KEY` . 
 
-You can get a `WEB3_INFURA_PROJECT_ID` by getting a free trial of [Infura](https://infura.io/). At the moment, it does need to be infura with brownie. You can find your `PRIVATE_KEY` from your ethereum wallet like [metamask](https://metamask.io/). 
+Puedes obtener un `WEB3_INFURA_PROJECT_ID` creando una cuenta en [Infura](https://infura.io/). Creas un nuevo proyecto y seleccionas la red de pruebas rinkeby. 
 
-You'll also need testnet rinkeby ETH and LINK. You can get LINK and ETH into your wallet by using the [rinkeby faucets located here](https://faucets.chain.link/rinkeby). If you're new to this, [watch this video.](https://www.youtube.com/watch?v=P7FX_1PePX0)
+En cuanto a tu `PRIVATE_KEY` las puedes obtener de una wallet como [metamask](https://metamask.io/). 
 
-You can add your environment variables to the `.env` file:
+Tambien vas a necesitar ETH rinkeby de prueba. Puedes obtener ETH usando el siguiente [faucet de rinkeby en el siguiente enlace](https://faucets.chain.link/rinkeby). Si eres nuevo por favor, [mira este video.](https://www.youtube.com/watch?v=P7FX_1PePX0)
+
+Puedes agregar tus variables de entorno en el archivo `.env`:
 
 ```
 export WEB3_INFURA_PROJECT_ID=<PROJECT_ID>
 export PRIVATE_KEY=<PRIVATE_KEY>
 ```
 
-Then, make sure your `brownie-config.yaml` has:
+Luego, debes estar seguro que tu archivo `brownie-config.yaml` tenga:
 
 ```
 dotenv: .env
 ```
 
-You can also [learn how to set environment variables easier](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html)
+# Uso
 
+Se puede hacer el despliegue en la red de pruebas rinkeby para mostar los NFTS, pero se recomienda que se hagan pruebas y despliegue en la red local, así no es necesario esperar a que las transacciones se procesem
 
-Or you can run the above in your shell. 
-
-
-# Usage
-
-There are 2 types of NFTs here. 
-1. `SimpleCollectibles.sol`
-2. `AdvancedCollectibles.sol`
-
-They each deploy unique dogs. The advanced version gives you a random breed (out of a Pug, Shiba Inu, and St. Bernard).
-
-The advanced collection uses a [Chainlink VRF](https://docs.chain.link/docs/get-a-random-number) to deploy the random dog. 
-
-You can 100% use the rinkeby testnet to see your NFTs rendered on opensea, but it's suggested that you test and build on a local development network so you don't have to wait as long for transactions. 
-
-### Running Scripts
-
-The simple collectibles work on a local network,  however the advanced requires a testnet. We default to rinkeby since that seems to be the testing standard for NFT platforms. You will need testnet rinkeby ETH and testnet Rinkeby LINK. You can find faucets for both in the [Chainlink documentation](https://docs.chain.link/docs/link-token-contracts#rinkeby). 
-
-# For the Simple ERC721
+# Ejecute los siguientes comandos.
 ```
 brownie run scripts/simple_collectible/deploy_simple.py --network rinkeby
 brownie run scripts/simple_collectible/create_collectible.py --network rinkeby
 ```
 
-# For the Advanced ERC721
+# Modificar la metadata
 
-You'll need [testnet Rinkeby](https://faucet.rinkeby.io/) and [testnet LINK](https://rinkeby.chain.link/) in the wallet associated with your private key. 
+Por defecto el script usa la metadata del archivo JSON que se cargo en Pinata y se pasa como parametro en create_collectible en la linea 5.
 
-```
-brownie run scripts/advanced_collectible/deploy_advanced.py --network rinkeby
-brownie run scripts/advanced_collectible/create_collectible.py --network rinkeby
-```
-Then:
-```
-brownie run scripts/advanced_collectible/create_metadata.py --network rinkeby
-brownie run scripts/advanced_collectible/set_tokenuri.py --network rinkeby
-```
+Pero si quisieras subir tus propias imagenes debes subirlas a Pinata y modificar la plantilla que se encuentra en la carpeta metadata/rinkeby/demo.json, ahi solo debes reemplazar la URL de image por la de la imagen que hayas subido a Pinata.
 
-# Verify on Etherscan
+Ese archivo JSON los debes subir a Pinata y por cada collecionable que desees crear debes crear manualmente (por ahora) un archivo JSON
 
-The simple contract and the advanced contract can be verified if you just set your `ETHERSCAN_TOKEN`. 
+Por ultimo debes reemplazar la URL de nuevo JSON en el script create_collectible en la linea 5.
 
-## Misc
-There are some helpful scripts in `helpful_scripts.py`.
+## Recursos
 
-# Viewing on OpenSea
-After running the scripts from the `For the Advanced ERC721` section
+Para empezar con brownie:
 
-1. Create the metadata
+* [Documentación de Chainlink ](https://docs.chain.link/docs)
+* Revisa la [documentación de Chainlink](https://docs.chain.link/docs) para empezar to get started from any level of smart contract engineering. 
+* Puedes revisar los otros [Brownie mixes](https://github.com/brownie-mix/) que pueden ser usado como punto de partida para tus propios contratos. Allí encontraras ejemplos para emepzar como.
+* ["Getting Started with Brownie"](https://medium.com/@iamdefinitelyahuman/getting-started-with-brownie-part-1-9b2181f4cb99) es un buen tutorial para que te familiarices con Brownie.
+* Para más información especificoa, puedes revisar la [documentación Brownie](https://eth-brownie.readthedocs.io/en/stable/).
 
-Metadata is the URI needed to upload data. You can either:
-- Upload to IPFS yourself
-- Use the metadata already created when you cloned this repo. 
-
-### If you want to upload to IPFS yourself
-
-Download [IPFS](https://ipfs.io/) 
-Set `export IPFS_URL=http://127.0.0.1:5001` and `export UPLOAD_IPFS=true` environment variables
-Run the IPFS daemon: `ipfs daemon`
-Then Run
-```
-brownie run scripts/advanced_collectible/create_metadata.py --network rinkeby
-```
-
-Alternatively, you could upload the uri manually:
-Add the file created in `metadata/rinkeby/NAME.json` to [IPFS](https://ipfs.io/) or [Pinata](https://pinata.cloud/). 
-### If you want to use the metadata from this repo
-
-Just run:
-```
-brownie run scripts/advanced_collectible/create_metadata.py --network rinkeby
-```
-
-2. Set the tokenURI 
-Run
-```
-brownie run scripts/advanced_collectible/set_tokenuri.py --network rinkeby
-```
-And after some time, (you may have to wait up to 20 minutes for it to render on opensea), you should see your NFT on opensea! [It'll look something like this.](https://testnets.opensea.io/assets/0x8acb7ca932892eb83e4411b59309d44dddbc4cdf/0)
-
-## *NEW* Pinata
-
-If you want to auto-upload to pinata instead of IPFS automatically, you can do so by getting a [Pinata API Key.](https://pinata.cloud/documentation#GettingStarted)
-
-You'll need the following environment variables (you can get them from Pinata)
-```
-PINATA_API_KEY
-PINATA_API_SECRET
-```
-Then run:
-```
-python scripts/upload_to_pinata.py
-```
-
-## Testing
-
-```
-brownie test
-```
-
-## Linting
-
-```
-pip install black 
-pip install autoflake
-autoflake --in-place --remove-unused-variables -r .
-black .
-```
-
-## Resources
-
-To get started with Brownie:
-
-* [Chainlink Documentation](https://docs.chain.link/docs)
-* Check out the [Chainlink documentation](https://docs.chain.link/docs) to get started from any level of smart contract engineering. 
-* Check out the other [Brownie mixes](https://github.com/brownie-mix/) that can be used as a starting point for your own contracts. They also provide example code to help you get started.
-* ["Getting Started with Brownie"](https://medium.com/@iamdefinitelyahuman/getting-started-with-brownie-part-1-9b2181f4cb99) is a good tutorial to help you familiarize yourself with Brownie.
-* For more in-depth information, read the [Brownie documentation](https://eth-brownie.readthedocs.io/en/stable/).
-
-Shoutout to [TheLinkMarines](https://twitter.com/TheLinkMarines) on twitter for the puppies!
-
-Any questions? Join our [Discord](https://discord.gg/2YHSAey)
-
-## License
+## Licencia
 
 This project is licensed under the [MIT license](LICENSE).
+Fork del repositorio de https://github.com/PatrickAlphaC
