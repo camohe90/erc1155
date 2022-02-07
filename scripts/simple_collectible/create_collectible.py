@@ -2,7 +2,7 @@
 from brownie import SimpleCollectible, accounts, network, config
 from scripts.helpful_scripts import OPENSEA_FORMAT
 
-sample_token_uri = "https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json"
+sample_token_uri = "https://gateway.pinata.cloud/ipfs/QmWQsp2XQk6L5xVhSvMb6xZ2WSTDW2415czRZbZjYFKXPN?preview=1"
 
 
 def main():
@@ -13,8 +13,8 @@ def main():
     transaction = simple_collectible.createCollectible(sample_token_uri, {"from": dev})
     transaction.wait(1)
     print(
-        "Awesome! You can view your NFT at {}".format(
+        "Felicitaciones ahora puedes distrutar tu NFT {}".format(
             OPENSEA_FORMAT.format(simple_collectible.address, token_id)
         )
     )
-    print('Please give up to 20 minutes, and hit the "refresh metadata" button')
+    print('Por favor espere 20 minutos para refrescar la ventana')
