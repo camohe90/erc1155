@@ -25,7 +25,7 @@ contract ImproveCollectible is ERC721, Ownable {
 
     function withdrawAll() public
     {
-        (bool success, ) = CREATOR.call{value:address(this).balance}("");
+        (bool success) = CREATOR.call{value:address(this).balance}("");
         require(success, "Transfer failed.");
     }
 }
