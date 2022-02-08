@@ -1,18 +1,17 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.9;
+pragma solidity >=0.6.0 <0.8.0;
 
-import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
+
 import '@openzeppelin/contracts/access/Ownable.sol';
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-
-contract ImproveCollectible is ERC721Enumerable, Ownable {
+contract ImproveCollectible is ERC721, Ownable {
     uint256 public tokenCounter;
-    address account1 = "";
-    address account2 = "";
     uint256 public constant MAX_SUPPLY = 10000;
+    address public CREATOR = 0x9f4CA7F3BbF23f4Df191c7E1A7E96c22F706AD36;
 
 
-    constructor () public ERC721 ("Doggs", "DOG"){
+    constructor () public ERC721 ("Doggsv2", "DOG"){
         tokenCounter = 0;
     }
 
@@ -24,13 +23,9 @@ contract ImproveCollectible is ERC721Enumerable, Ownable {
         return newItemId;
     }
 
-    function withdrawTeam(uint256 amount) public payable onlyOwner {
-        uint256 percent = amount / 100;
-        require(payable(account1).send(percent * 50));
-        require(payable(account2).send(percent * 50));
-        
+    function withdrawAll() public
+    {
+        (bool success, ) = CREATOR.call{value:address(this).balance}("");
+        require(success, "Transfer failed.");
     }
-
-
-
 }
