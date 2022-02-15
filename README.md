@@ -99,3 +99,7 @@ Para empezar con brownie:
 
 This project is licensed under the [MIT license](LICENSE).
 Fork del repositorio de https://github.com/PatrickAlphaC
+
+## Contribuidores
+@camohe90
+@djmendez-coding
