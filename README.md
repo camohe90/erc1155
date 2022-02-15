@@ -20,7 +20,7 @@ Sino funciona podrias hacerlo via pipx
 ```bash
 pip install --user pipx
 pipx ensurepath
-# restart your terminal
+# reinicia tu terminal
 pipx install eth-brownie
 ```
 
