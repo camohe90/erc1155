@@ -19,7 +19,7 @@ contract SimpleCollectible is ERC721, ERC721URIStorage, Ownable{
         _setTokenURI(tokenId, tokenURI);
     }
 
-     function tokenCounter()public view returns(uint256){
+    function tokenCounter()public view returns(uint256){
         return _tokenIdCounter.current();
     }
 
@@ -35,6 +35,5 @@ contract SimpleCollectible is ERC721, ERC721URIStorage, Ownable{
     {
         return super.tokenURI(tokenId);
     }
-
 
 }
