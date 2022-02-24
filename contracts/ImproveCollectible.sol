@@ -38,11 +38,15 @@ contract ImproveCollectible is ERC721, ERC721URIStorage, ERC721Burnable, AccessC
     function createCollectible(address to, string memory tokenURI) public onlyRole(MINTER_ROLE){
         uint256 tokenId = _tokenIdCounter.current();
         require(tokenId < maxSupply, "No art left");
-        require(owners_count[msg.sender] < maxPerAccount, "You can't mint more tokens");
+        require(owners_count[to] <= maxPerAccount, "You can't mint more tokens");
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, tokenURI);
-        owners_count[msg.sender]++;
+        owners_count[to]++;
+    }
+
+    function getCountByAccout(address account) public returns(uint256) onlyRole(MINTER_ROLE{
+        return owners_count[account];
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)
