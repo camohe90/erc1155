@@ -1,6 +1,6 @@
-# nft-mix Basado en el repo de Patrick Collins
+# ERC1155
 
-En este repositorio vamos a desplegar un contrato inteligente de NFT para crear una colección de mascotas
+En este repositorio vamos a desplegar un contrato que permite usar el estandar ERC1155
 
 ## Prerequisitos
 
@@ -67,23 +67,14 @@ dotenv: .env
 
 # Uso
 
-Se puede hacer el despliegue en la red de pruebas rinkeby para mostar los NFTS, pero se recomienda que se hagan pruebas y despliegue en la red local, así no es necesario esperar a que las transacciones se procesem
+Se puede hacer el despliegue en la red de pruebas rinkeby para mostar los ERC1155, pero se recomienda que se hagan pruebas y despliegue en la red local, así no es necesario esperar a que las transacciones se procesem
 
 # Ejecute los siguientes comandos.
 ```
-brownie run scripts/simple_collectible/deploy_simple.py --network rinkeby
-brownie run scripts/simple_collectible/create_collectible.py --network rinkeby
+brownie run scripts/collections_scripts/deploy.py --network rinkeby
+
 ```
 
-# Modificar la metadata
-
-Por defecto el script usa la metadata del archivo JSON que se cargo en Pinata y se pasa como parametro en create_collectible en la linea 5.
-
-Pero si quisieras subir tus propias imagenes debes subirlas a Pinata y modificar la plantilla que se encuentra en la carpeta metadata/rinkeby/demo.json, ahi solo debes reemplazar la URL de image por la de la imagen que hayas subido a Pinata.
-
-Ese archivo JSON los debes subir a Pinata y por cada collecionable que desees crear debes crear manualmente (por ahora) un archivo JSON
-
-Por ultimo debes reemplazar la URL de nuevo JSON en el script create_collectible en la linea 5.
 
 ## Recursos
 
@@ -102,4 +93,4 @@ Fork del repositorio de https://github.com/PatrickAlphaC
 
 ## Contribuidores
 @camohe90
-@djmendez-coding
+
