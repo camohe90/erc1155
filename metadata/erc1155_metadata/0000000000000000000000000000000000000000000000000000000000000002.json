@@ -1,0 +1,15 @@
+{
+    "name": "Beach 2",
+    "description": "Beautiful landscape 2",
+    "image": "https://gateway.pinata.cloud/ipfs/QmSJnhZw4SWxs43iGhgoT8fmi7gpqcmmuo2JDbSMezHLwK",
+    "attributes": [
+      {
+        "trait_type": "Sand",
+        "value": 30
+      },
+      {
+        "trait_type": "Sea",
+        "value": 80
+      }
+    ]
+  }
